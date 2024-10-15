@@ -3,6 +3,11 @@ def mouse():
 
 mouse()
 
+def cat():
+    print("Meow")
+
+cat()
+
 def hello():
     print("hello")
 
