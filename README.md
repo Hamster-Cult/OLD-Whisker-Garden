@@ -7,4 +7,4 @@
 - Keita - up2202994@myport.ac.uk - UP2202994 , 145491346
 - Kimona - up2112249@myport.ac.uk - UP2112249 , 151773442
 - Chloe - up2247593@myport.ac.uk - UP2247593 , 158167628
-
+- Aisha - up2245047@myport.ac.uk - UP2245047, 153377384
