@@ -14,3 +14,18 @@ CREATE TABLE user_entries (
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (entry_id) REFERENCES entries(entry_id)
 )
+
+CREATE TABLE garden (
+    garden_slot SERIAL PRIMARY KEY,
+    plant_id INT NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    arhived BOOLEAN NOT NULL,
+    maturity INT NOT NULL,
+    last watered DATE NOT NULL,
+    FOREIGN KEY (plant_id) REFERENCES plant(plant_id)
+)
+
+CREATE TABLE plant (
+    plant_id SERIAL PRIMARY KEY,
+    plant_type VARCHAR(20) NOT NULL,
+)
