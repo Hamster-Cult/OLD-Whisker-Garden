@@ -1,4 +1,4 @@
-# SETaP-Coursework
+# Whisker-Garden
 
 ## Participants (email, student , github)
 - Oliver - up2209356@myport.ac.uk - UP2209356 , 106149435
