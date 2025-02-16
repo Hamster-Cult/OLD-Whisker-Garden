@@ -23,6 +23,7 @@ CREATE TABLE goals (
     goal_achievement BOOLEAN NOT NULL
 );
 
+/*Keita's code*/
 CREATE TABLE entries (
     entry_id SERIAL PRIMARY KEY,
     entry VARCHAR(255) NULL,
