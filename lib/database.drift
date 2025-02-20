@@ -1,7 +1,7 @@
 
 /*Chloe's code*/
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
+    userId SERIAL PRIMARY KEY,
     plant_id INT NOT NULL,
     username VARCHAR(20) NOT NULL,
     level INT NOT NULL CHECK (level >= 0),

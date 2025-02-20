@@ -1,58 +1,102 @@
+import 'dart:ffi';
+import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift_postgres/drift_postgres.dart';
 import 'package:postgres/postgres.dart';
 
-part 'database.g.dart';
+part 'app_db.g.dart';
 
+@DriftDatabase(
+  include: {'database.drift'},
+)
+class AppDatabase extends _$AppDatabase {
+  static AppDatabase instance() => AppDatabase();
+
+  AppDatabase() : super(_openConnection());
+
+  @override
+  int get schemaVersion => 1;
+}
+
+@UseRowClass(Users)
 class Users extends Table {
   IntColumn get userId => integer().autoIncrement()();
   IntColumn get plantId => integer()();
   TextColumn get username => text()();
   IntColumn get level => integer()();
   IntColumn get exp => integer()();
+
+  @override
+  Set<Column> get primaryKey => {userId};
 }
 
-class MoodLog extends Table {
+@UseRowClass(MoodLogs)
+class MoodLogs extends Table {
   IntColumn get moodId => integer().autoIncrement()();
   DateTimeColumn get moodDate => dateTime()();
   DateTimeColumn get moodTime => dateTime()();
   IntColumn get moodRating => integer()();
   TextColumn get moodText => text().nullable()();
+
+  @override
+  Set<Column> get primaryKey => {moodId};
 }
 
+@UseRowClass(Goals)
 class Goals extends Table {
   IntColumn get goalId => integer().autoIncrement()();
   IntColumn get plantId => integer()();
   TextColumn get goalName => text()();
   TextColumn get goalDesc => text().nullable()();
   BoolColumn get goalAchievement => boolean()();
-}
-
-@DriftDatabase(tables: [Users, MoodLog, Goals])
-class AppDatabase extends _$AppDatabase {
-  AppDatabase(QueryExecutor e) : super(e);
 
   @override
-  int get schemaVersion => 1;
+  Set<Column> get primaryKey => {goalId};
 }
 
-void main() async {
-  final pgDatabase = PgDatabase(
-    endpoint: Endpoint(
-      host: 'localhost',
-      database: 'WhiskerGardens',
-      username: 'postgres',
-      password: 'password',
-    ),
-    settings: ConnectionSettings(
-      sslMode: SslMode.disable,
-    ),
-  );
+@UseRowClass(Entries)
+class Entries extends Table {
+  IntColumn get entryId => integer().autoIncrement()();
+  TextColumn get entry => text().nullable()();
+  DateTimeColumn get entryDate => dateTime()();
+  DateTimeColumn get entryTime => dateTime()();
+  IntColumn get rating => integer().nullable()();
 
-  final database = AppDatabase(pgDatabase);
-
-  await database.users.insertOne
+  @override
+  Set<Column> get primaryKey => {entryId};
 }
+
+@UseRowClass(Plants)
+class Plants extends Table {
+  IntColumn get plantId => integer().autoIncrement()();
+  TextColumn get plantType => text()();
+
+  @override
+  Set<Column> get primaryKey => {plantId};
+}
+
+@UseRowClass(UserEntries)
+class UserEntries extends Table {
+  IntColumn get userId => integer()();
+  IntColumn get entryId => integer()();
+
+  @override
+  Set<Column> get primaryKey => {userId, entryId};
+}
+
+@UseRowClass(Garden)
+class Garden extends Table {
+  IntColumn get gardenSlot => integer().autoIncrement()();
+  IntColumn get plantId => integer()();
+  TextColumn get name => text()();
+  BoolColumn get archived => boolean()();
+  IntColumn get maturity => integer()();
+  DateTimeColumn get lastWatered => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {gardenSlot};
+}
+
 
 
 
