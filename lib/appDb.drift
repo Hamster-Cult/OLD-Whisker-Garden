@@ -1,7 +1,9 @@
 
+
 /*Chloe's code*/
+/*
 CREATE TABLE users (
-    userId SERIAL PRIMARY KEY,
+    user_id SERIAL PRIMARY KEY,
     plant_id INT NOT NULL,
     username VARCHAR(20) NOT NULL,
     level INT NOT NULL CHECK (level >= 0),
@@ -23,8 +25,9 @@ CREATE TABLE goals (
     goal_desc TEXT NULL,
     goal_achievement BOOLEAN NOT NULL
 );
-
+*/
 /*Keita's code*/
+/*
 CREATE TABLE entries (
     entry_id SERIAL PRIMARY KEY,
     entry VARCHAR(255) NULL,
@@ -53,7 +56,62 @@ CREATE TABLE garden (
     maturity INT NOT NULL,
     last_watered DATE NOT NULL,
     FOREIGN KEY (plant_id) REFERENCES plant(plant_id)
-); 
+); */
+
+CREATE TABLE users (
+  userId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  plant_id INTEGER NOT NULL,
+  username TEXT NOT NULL,
+  level INTEGER NOT NULL CHECK (level >= 0),
+  exp INTEGER NOT NULL CHECK (exp >= 0)
+);
+
+CREATE TABLE mood_log (
+  mood_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  mood_date DATE NOT NULL,
+  mood_time TIME NOT NULL,
+  mood_rating INTEGER NOT NULL CHECK (mood_rating BETWEEN 1 AND 5),
+  mood_text TEXT
+);
+
+CREATE TABLE goals (
+  goal_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  plant_id INTEGER NOT NULL,
+  goal_name TEXT NOT NULL,
+  goal_desc TEXT,
+  goal_achievement BOOLEAN NOT NULL
+);
+
+CREATE TABLE entries (
+  entry_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  entry TEXT,
+  entry_date DATE NOT NULL,
+  entry_time TIME NOT NULL,
+  rating INTEGER CHECK (rating >= 0 AND rating <= 5)
+);
+
+CREATE TABLE plant (
+  plant_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  plant_type TEXT NOT NULL
+);
+
+CREATE TABLE user_entries (
+  user_id INTEGER NOT NULL,
+  entry_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(userId),
+  FOREIGN KEY (entry_id) REFERENCES entries(entry_id)
+);
+
+CREATE TABLE garden (
+  garden_slot INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  plant_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  archived BOOLEAN NOT NULL,
+  maturity INTEGER NOT NULL,
+  last_watered DATE NOT NULL,
+  FOREIGN KEY (plant_id) REFERENCES plant(plant_id)
+);
+
 
 /*Dart Code?? need to double check if this is correct with val??*/
 
