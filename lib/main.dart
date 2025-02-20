@@ -18,6 +18,8 @@ class MainApp extends StatelessWidget {
 
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -90,6 +92,8 @@ class _HomePageState extends State<HomePage> {
 
 
 class TitlePage extends StatelessWidget {
+  const TitlePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Text('You are on the title page!');
@@ -97,6 +101,8 @@ class TitlePage extends StatelessWidget {
 }
 
 class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -121,6 +127,8 @@ class LandingPage extends StatelessWidget {
 }
 
 class GardenShelfPage extends StatelessWidget {
+  const GardenShelfPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Text('You are on the garden page!');
@@ -128,6 +136,8 @@ class GardenShelfPage extends StatelessWidget {
 }
 
 class MoodLoggingPage extends StatelessWidget {
+  const MoodLoggingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Text('You are on the mood logging page!');
